@@ -1,0 +1,40 @@
+# Keil MDK output
+Objects/
+Listings/
+Output/
+*.o
+*.obj
+*.d
+*.crf
+*.map
+*.axf
+*.elf
+*.hex
+*.bin
+*.lst
+*.lnp
+*.dep
+*.bak
+*.htm
+*.html
+*.uvguix.*
+*.uvoptx
+
+# STM32CubeIDE and generic builds
+Debug/
+Release/
+build/
+cmake-build-*/
+.settings/
+.metadata/
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.tmp
+~$*
+

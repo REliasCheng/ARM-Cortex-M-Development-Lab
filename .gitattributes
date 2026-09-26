@@ -1,0 +1,18 @@
+* text=auto
+*.c text eol=crlf
+*.h text eol=crlf
+*.s text eol=crlf
+*.S text eol=crlf
+*.ld text eol=lf
+*.sct text eol=crlf
+*.uvprojx text eol=crlf
+*.ioc text eol=crlf
+*.md text eol=lf
+*.csv text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+
+# Preserve copied course files byte-for-byte.
+projects/**/course/** -text
