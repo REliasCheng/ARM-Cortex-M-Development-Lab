@@ -5,13 +5,13 @@
 
 An embedded firmware development repository focusing on ARM Cortex-M architecture, peripheral drivers and hardware-software integration.
 
-## 项目简介 | Overview
+## 👋 项目简介 | Overview
 
 仓库包含 19 个面向 Cortex-M4 的固件工程，围绕启动流程、时钟系统、中断机制和外设数据通路组织。GD32F407 工程使用 CMSIS 与 GD32F4 标准外设库，STM32F407 工程包含 STM32CubeMX 配置和 HAL 初始化代码。
 
 工程按固件机制分类。每个项目保留与源码对应的 Keil 或 CubeMX 配置，可从外设初始化、驱动接口和中断处理路径进入具体实现。
 
-## 技术范围 | Technical Scope
+## ⚙ 技术范围 | Technical Scope
 
 ### ⚙ 硬件 Hardware
 
@@ -33,7 +33,7 @@ An embedded firmware development repository focusing on ARM Cortex-M architectur
 - STM32CubeMX `.ioc` 配置
 - `User`、`Hardware`、`Library`、`Middleware` 模块边界
 
-## 固件架构 | Firmware Architecture
+## 🧠 固件架构 | Firmware Architecture
 
 ![ARM Cortex-M 固件分层](assets/images/architecture/firmware-stack.svg)
 
@@ -55,7 +55,7 @@ Cortex-M4 Hardware
 
 GD32 工程主要采用 `User/`、`Hardware/`、`Library/` 和 `Middleware/` 组织模块；CubeMX 工程使用 `Core/`、`Drivers/`、`MDK-ARM/` 与 `.ioc` 文件。详细说明见 [Cortex-M 架构](docs/architecture.md)、[中断系统](docs/interrupt-system.md)和[固件分层](docs/firmware-architecture.md)。
 
-## 核心项目 | Featured Projects
+## 🚀 核心项目 | Featured Projects
 
 ### [GPIO 与板级输出 | GPIO and Board Output](projects/01_GPIO/)
 
@@ -107,7 +107,7 @@ GD32 工程主要采用 `User/`、`Hardware/`、`Library/` 和 `Middleware/` 组
 
 STM32CubeMX/HAL 示例和后期固件骨架位于 [HAL 与固件结构](projects/08_HAL_AND_FIRMWARE_ARCHITECTURE/)。完整的 19 个工程清单见[项目筛选说明](docs/project-selection.md)。
 
-## 工程结构 | Repository Structure
+## 📂 工程结构 | Repository Structure
 
 ```text
 ARM-Cortex-M-Development-Lab/
@@ -127,7 +127,7 @@ ARM-Cortex-M-Development-Lab/
 
 各项目的原始工程保存在 `projects/**/course/`，Keil 工程、启动文件、CMSIS、厂商库和应用代码保持相互对应。
 
-## 开发环境 | Development Environment
+## 🛠 开发环境 | Development Environment
 
 - **GD32F407VE**：主要目标平台，覆盖 SWD、调试串口、USB Device、LED/按键、SDIO、SPI Flash 和扩展接口。
 - **STM32F407**：提供标准库及 STM32CubeMX/HAL 对照工程，`.ioc` 文件面向 STM32F407 LQFP100 设备。
@@ -137,7 +137,7 @@ ARM-Cortex-M-Development-Lab/
 
 打开工程前需要安装对应 Device Pack，并确认目标芯片、启动文件、Include Paths、Flash Algorithm 和调试器配置。Keil 工程位于各项目的 `course/Project/` 或 `course/MDK-ARM/` 目录。详细配置见[开发环境说明](docs/development-environment.md)。
 
-## 技术文档 | Documentation
+## 📖 技术文档 | Documentation
 
 - [Cortex-M 工程架构](docs/architecture.md)
 - [时钟系统](docs/clock-system.md)
@@ -146,7 +146,7 @@ ARM-Cortex-M-Development-Lab/
 - [外设资源关系](docs/peripheral-map.md)
 - [工程筛选与完整性记录](docs/project-selection.md)
 
-## 来源与许可 | Source and License
+## 📜 来源与许可 | Source and License
 
 项目源码快照保存在 `projects/**/course/`，文件级 SHA-256 记录见 [`docs/course-source-sha256.csv`](docs/course-source-sha256.csv)。第三方组件、硬件资料与图片来源见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 和 [`assets/images/SOURCES.md`](assets/images/SOURCES.md)。
 
