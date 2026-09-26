@@ -8,5 +8,6 @@
 | `architecture/oled-i2c-update-1.png` | `day10/Resource/IIC更新OLED1.png` | OLED buffer and I²C update explanation |
 | `architecture/oled-i2c-update-2.png` | `day10/Resource/IIC更新OLED2.png` | OLED buffer and I²C update explanation |
 | `architecture/oled-i2c-update-3.png` | `day10/Resource/IIC更新OLED3.png` | OLED buffer and I²C update explanation |
+| `architecture/firmware-stack.svg` | Repository-authored from the selected project layouts and call paths | Firmware layer overview |
 
-The schematic PNGs are page renders of the source PDFs. They are documentation references, not photographs or runtime evidence.
+The schematic PNGs are page renders of the source PDFs. They are documentation references, not photographs or runtime evidence. The SVG describes the repository's actual source layers; it does not represent a measured runtime result.

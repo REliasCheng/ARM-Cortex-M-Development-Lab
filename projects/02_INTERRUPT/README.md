@@ -20,3 +20,13 @@ GPIO input → EXTI line → NVIC → ISR
 
 The Keil project is `course/Project/GD32F407.uvprojx`.
 
+## Hardware relationship
+
+The button GPIO is mapped to an EXTI line through the system configuration block. The EXTI controller detects the configured edge and forwards the pending request to an NVIC channel; the handler clears the pending state before dispatching the registered action.
+
+## Key interfaces
+
+- [`EXTI.h`](exti-callback/course/Library/EXTI.h) — initialization and callback-facing interface.
+- [`EXTI.c`](exti-callback/course/Library/EXTI.c) — line routing, trigger and NVIC configuration.
+- [`EXTI_config.h`](exti-callback/course/Library/EXTI_config.h) — project-level interrupt mapping.
+- [`gd32f4xx_it.c`](exti-callback/course/User/gd32f4xx_it.c) — exception handlers.
