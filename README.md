@@ -94,3 +94,10 @@ Build steps and configuration notes are in [`docs/development-environment.md`](d
 
 Source attribution and third-party components are recorded in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). The root MIT license applies to repository-authored documentation and future personal implementations, not to third-party code with separate terms.
 
+## Related repositories
+
+- [Embedded-Systems-Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) — circuits, digital logic and computer architecture.
+- [Embedded-C-Cpp-Learning](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) — C/C++ interfaces, memory and modular software.
+- [stc89c52-learning](https://github.com/REliasCheng/stc89c52-learning) and [STC8-MCU-Learning](https://github.com/REliasCheng/STC8-MCU-Learning) — 8-bit MCU drivers and board-level firmware.
+
+This repository continues that work on 32-bit Cortex-M4 targets with NVIC, DMA, richer clock trees and vendor firmware frameworks.
