@@ -1,8 +1,8 @@
-# Firmware architecture
+# 固件分层 | Firmware Architecture
 
-## Layer boundaries
+## 层次边界 | Layer Boundaries
 
-The selected GD32 projects evolve from direct peripheral access toward explicit board and protocol modules:
+保留的 GD32 工程从直接外设访问逐步拆分出板级模块和协议接口：
 
 ```mermaid
 flowchart TD
@@ -14,38 +14,37 @@ flowchart TD
     V --> C[CMSIS and Cortex-M4]
 ```
 
-`main.c` owns initialization order and application flow. `Hardware/` maps board devices such as LEDs, buzzers, OLED and Flash. `Library/` or `Middleware/` contains reusable EXTI, USART, timer, I²C and SPI interfaces. Vendor code provides register definitions and peripheral operations.
+`main.c` 负责初始化顺序和应用流程；`Hardware/` 对应 LED、蜂鸣器、OLED 和 Flash 等板级器件；`Library/` 或 `Middleware/` 提供 EXTI、USART、Timer、I²C 和 SPI 接口；厂商代码提供寄存器定义与外设操作。
 
-## GD32 project shape
-
-```text
-User/          main, SysTick and interrupt handlers
-Hardware/      board and device modules
-Library/       reusable peripheral interfaces
-Middleware/    later protocol/service boundary
-Firmware/      CMSIS and GD32F4 peripheral library
-Project/       Keil target configuration
-```
-
-The debug skeleton shows the later `Hardware/` and `Middleware/` split across EXTI, I²C, SPI and USART/DMA code.
-
-## STM32 CubeMX/HAL shape
+## GD32 工程结构
 
 ```text
-Core/          generated initialization and application entry
-Drivers/       CMSIS and STM32 HAL
-MDK-ARM/       Keil target and startup files
-*.ioc          pin, clock and peripheral configuration
+User/          main、SysTick 与中断处理
+Hardware/      板级器件模块
+Library/       可复用外设接口
+Middleware/    后期工程中的协议/服务边界
+Firmware/      CMSIS 与 GD32F4 外设库
+Project/       Keil 目标配置
 ```
 
-CubeMX owns initialization code and callback hooks. Application changes should remain inside generated user-code sections or separate modules if the project is regenerated.
+调试骨架工程使用 `Hardware/` 与 `Middleware/` 分隔 EXTI、I²C、SPI 和 USART/DMA 代码。
 
-## Data ownership
+## STM32 CubeMX/HAL 结构
 
-- Interrupt handlers acknowledge events and move the minimum required data.
-- DMA owns configured transfer buffers while a transfer is active.
-- Device modules own protocol details such as PCF8563 registers or GD25Q32 commands.
-- Application code owns system state and decides when modules are invoked.
+```text
+Core/          生成的初始化与应用入口
+Drivers/       CMSIS 与 STM32 HAL
+MDK-ARM/       Keil 目标与启动文件
+*.ioc          引脚、时钟和外设配置
+```
 
-The repository keeps each project independent. Combining them requires a new resource map for pins, clocks, DMA channels, interrupt priorities and shared buffers.
+CubeMX 管理初始化代码和回调入口。需要重新生成工程时，应用代码应保存在用户代码区或独立模块中。
 
+## 数据归属 | Data Ownership
+
+- 中断处理函数确认事件并搬运必要数据。
+- DMA 传输期间，配置的缓冲区由对应传输路径占用。
+- 器件模块管理 PCF8563 寄存器或 GD25Q32 指令等协议细节。
+- 应用层保存系统状态并决定模块调用顺序。
+
+各项目保持独立。组合模块前需要重新核对引脚、时钟、DMA 通道、中断优先级和共享缓冲区。

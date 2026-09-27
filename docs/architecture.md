@@ -1,8 +1,8 @@
-# Cortex-M firmware architecture
+# Cortex-M 固件架构 | Firmware Architecture
 
-## Project startup
+## 启动流程 | Startup
 
-The retained bare-metal projects follow the standard Cortex-M startup path:
+保留的裸机工程遵循 Cortex-M 的标准启动路径：
 
 ```mermaid
 flowchart LR
@@ -14,11 +14,11 @@ flowchart LR
     P --> L[Main loop / interrupt callbacks]
 ```
 
-The startup file supplies the vector table and reset entry. CMSIS defines core registers and exception interfaces. The vendor library then exposes GD32 RCU/GPIO/USART or STM32 HAL initialization functions.
+启动文件提供向量表和复位入口，CMSIS 定义内核寄存器与异常接口，厂商外设库提供 GD32 RCU/GPIO/USART 或 STM32 HAL 初始化接口。
 
-## Interrupt path
+## 中断路径 | Interrupt Path
 
-Peripheral events are routed through NVIC entries into ISR code. Projects using callbacks keep device-facing initialization separate from the application action:
+外设事件通过 NVIC 进入 ISR。使用回调的工程把外设初始化与应用动作分开：
 
 ```text
 GPIO edge / USART receive / timer update
@@ -34,25 +34,24 @@ GPIO edge / USART receive / timer update
        callback or application state
 ```
 
-The EXTI and USART projects show this progression from direct ISR logic to callback registration and reusable interfaces.
+EXTI 和 USART 工程保留了从 ISR 直接处理到回调注册与接口复用的代码路径。
 
-## Data movement
+## 数据搬运 | Data Movement
 
-The DMA examples configure source, destination, transfer width, direction and completion handling. USART DMA projects separate byte reception from CPU-driven polling, while ADC scanning uses DMA to move conversion sequences into memory.
+DMA 工程配置源地址、目标地址、传输宽度、方向和完成处理。USART DMA 将字节搬运从前台轮询中分离；ADC 扫描使用 DMA 将转换序列写入内存。
 
-## Firmware organization
+## 工程组织 | Project Layout
 
-The GD32 examples commonly contain:
+GD32 工程常见目录：
 
-- `Firmware/` — CMSIS and GD32F4 peripheral support.
-- `Hardware/` — board-facing LED, key, USART, timer, display or sensor modules.
-- `Middleware/` — protocol and service-facing interfaces in the later debug project.
-- `User/` — `main.c`, interrupt handlers and application flow.
-- `Project/` — Keil target configuration.
+- `Firmware/`：CMSIS 与 GD32F4 外设支持。
+- `Hardware/`：LED、按键、USART、定时器、显示和传感器等板级模块。
+- `Middleware/`：后期调试工程中的协议与服务接口。
+- `User/`：`main.c`、中断处理和应用流程。
+- `Project/`：Keil 目标配置。
 
-CubeMX projects use `Core/`, `Drivers/`, `MDK-ARM/` and an `.ioc` configuration file.
+CubeMX 工程使用 `Core/`、`Drivers/`、`MDK-ARM/` 和 `.ioc` 配置文件。
 
-## Scope
+## 范围 | Scope
 
-All migrated examples are bare-metal firmware. The source collection contains RTOS concept diagrams, but no running FreeRTOS or RTX application has been included.
-
+迁移工程均为裸机固件。实时调度、任务通信与同步机制在独立的 [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab) 中组织。

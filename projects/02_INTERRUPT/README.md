@@ -1,12 +1,10 @@
-# EXTI and NVIC
+# EXTI 与 NVIC | EXTI and NVIC
 
-## Selected project
+## 代表工程 | Selected Project
 
-[`exti-callback/course/`](exti-callback/course/) contains the reusable EXTI example. It combines GPIO input configuration, EXTI line routing, NVIC priority, interrupt flag handling and a callback-facing interface.
+[`exti-callback/course/`](exti-callback/course/) 包含 GPIO 输入配置、EXTI Line 路由、NVIC 优先级、Pending Flag 处理和回调接口。按键路径使用 SysTick 计时，将机械消抖与原始边沿检测分开。
 
-SysTick timing is used in the button path to separate mechanical debounce timing from raw edge detection.
-
-## Event flow
+## 事件流 | Event Flow
 
 ```text
 Button edge
@@ -18,15 +16,15 @@ GPIO input → EXTI line → NVIC → ISR
                          callback / LED action
 ```
 
-The Keil project is `course/Project/GD32F407.uvprojx`.
+Keil 工程位于 `course/Project/GD32F407.uvprojx`。
 
-## Hardware relationship
+## 硬件关系 | Hardware Relationship
 
-The button GPIO is mapped to an EXTI line through the system configuration block. The EXTI controller detects the configured edge and forwards the pending request to an NVIC channel; the handler clears the pending state before dispatching the registered action.
+GPIO 输入通过系统配置映射到 EXTI Line。EXTI 检测指定边沿并向 NVIC 提交中断请求；处理函数清除 Pending Flag 后再分发注册动作。
 
-## Key interfaces
+## 关键接口 | Key Interfaces
 
-- [`EXTI.h`](exti-callback/course/Library/EXTI.h) — initialization and callback-facing interface.
-- [`EXTI.c`](exti-callback/course/Library/EXTI.c) — line routing, trigger and NVIC configuration.
-- [`EXTI_config.h`](exti-callback/course/Library/EXTI_config.h) — project-level interrupt mapping.
-- [`gd32f4xx_it.c`](exti-callback/course/User/gd32f4xx_it.c) — exception handlers.
+- [`EXTI.h`](exti-callback/course/Library/EXTI.h)：初始化与回调接口。
+- [`EXTI.c`](exti-callback/course/Library/EXTI.c)：Line 路由、触发方式和 NVIC 配置。
+- [`EXTI_config.h`](exti-callback/course/Library/EXTI_config.h)：工程级中断映射。
+- [`gd32f4xx_it.c`](exti-callback/course/User/gd32f4xx_it.c)：异常处理函数。

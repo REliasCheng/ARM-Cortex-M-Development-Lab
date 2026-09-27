@@ -1,12 +1,12 @@
-# RTC, watchdog and power management
+# RTC、看门狗与电源管理 | RTC, Watchdog and Power
 
-## Selected projects
+## 代表工程 | Selected Projects
 
-- [`rtc-alarm/course/`](rtc-alarm/course/) — RTC clock source, backup domain, calendar/alarm configuration and interrupt path.
-- [`independent-watchdog/course/`](independent-watchdog/course/) — FWDGT prescaler/reload setup and feed sequence.
-- [`pmu-modes/course/`](pmu-modes/course/) — GD32 power-management modes and wake-up handling.
+- [`rtc-alarm/course/`](rtc-alarm/course/)：RTC 时钟源、备份域、Calendar/Alarm 与中断路径。
+- [`independent-watchdog/course/`](independent-watchdog/course/)：FWDGT Prescaler/Reload 与喂狗流程。
+- [`pmu-modes/course/`](pmu-modes/course/)：GD32 电源模式与唤醒处理。
 
-## System relationship
+## 系统关系 | System Relationship
 
 ```text
 Low-speed clock → RTC / FWDGT
@@ -18,11 +18,11 @@ Low-speed clock → RTC / FWDGT
 Application → PMU mode → wake-up source → clock recovery
 ```
 
-RTC backup-domain state and watchdog timeout survive different reset/power conditions. Changes should be checked against the selected clock source and vendor reference manual.
+RTC Backup Domain 与 Watchdog Timeout 在不同复位和供电条件下具有不同保持行为，修改配置时需要同时核对时钟源和厂商参考手册。
 
-## Key interfaces
+## 关键接口 | Key Interfaces
 
-- [`RTC alarm main.c`](rtc-alarm/course/User/main.c) — backup-domain, calendar and alarm setup.
-- [`Watchdog main.c`](independent-watchdog/course/User/main.c) — FWDGT timeout and feed sequence.
-- [`PMU main.c`](pmu-modes/course/User/main.c) — low-power entry and wake-up flow.
-- [`PMU interrupt handlers`](pmu-modes/course/User/gd32f4xx_it.c) — wake-up related interrupt path.
+- [`RTC alarm main.c`](rtc-alarm/course/User/main.c)：Backup Domain、Calendar 与 Alarm 配置。
+- [`Watchdog main.c`](independent-watchdog/course/User/main.c)：FWDGT Timeout 与 Feed Sequence。
+- [`PMU main.c`](pmu-modes/course/User/main.c)：低功耗进入与唤醒流程。
+- [`PMU interrupt handlers`](pmu-modes/course/User/gd32f4xx_it.c)：唤醒相关中断路径。

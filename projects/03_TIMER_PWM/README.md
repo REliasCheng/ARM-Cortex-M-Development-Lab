@@ -1,10 +1,10 @@
-# Timer and PWM
+# 定时器与 PWM | Timer and PWM
 
-## Selected project
+## 代表工程 | Selected Project
 
-[`timer-pwm-buzzer/course/`](timer-pwm-buzzer/course/) retains the timer-library example connected to a buzzer output. It shows timer base configuration, channel setup and runtime output updates through a board-facing module.
+[`timer-pwm-buzzer/course/`](timer-pwm-buzzer/course/) 保存 Timer 接口与蜂鸣器输出组合工程，包含定时器时基、Channel 配置和运行时输出更新。
 
-## Timing relationship
+## 时序关系 | Timing Relationship
 
 ```text
 Timer input clock
@@ -18,15 +18,15 @@ Prescaler → counter → auto-reload period
                        buzzer
 ```
 
-Timer input frequency can differ from the visible APB clock after prescaling. Check the project clock configuration before changing PWM frequency or duty cycle.
+APB 分频后，Timer 输入时钟可能与可见的 APB 时钟不同；修改 PWM 频率或占空比前需要核对工程时钟配置。
 
-## Hardware relationship
+## 硬件关系 | Hardware Relationship
 
-The timer channel is routed to a GPIO alternate function. Prescaler and auto-reload values define the PWM period; the channel compare value controls the active portion of that period before the signal reaches the buzzer circuit.
+Timer Channel 通过 GPIO Alternate Function 输出。Prescaler 与 Auto-reload 定义 PWM 周期，Compare Value 决定有效时间，再由板级模块连接蜂鸣器电路。
 
-## Key interfaces
+## 关键接口 | Key Interfaces
 
-- [`TIMER.c`](timer-pwm-buzzer/course/Library/TIMER.c) — timer base and channel configuration.
-- [`TIMER_config.h`](timer-pwm-buzzer/course/Library/TIMER_config.h) — timer/channel selection.
-- [`bsp_buzzer2.c`](timer-pwm-buzzer/course/Hardware/bsp_buzzer2.c) — buzzer-facing output control.
-- [`main.c`](timer-pwm-buzzer/course/User/main.c) — application update flow.
+- [`TIMER.c`](timer-pwm-buzzer/course/Library/TIMER.c)：Timer 时基与 Channel 配置。
+- [`TIMER_config.h`](timer-pwm-buzzer/course/Library/TIMER_config.h)：Timer/Channel 选择。
+- [`bsp_buzzer2.c`](timer-pwm-buzzer/course/Hardware/bsp_buzzer2.c)：蜂鸣器输出控制。
+- [`main.c`](timer-pwm-buzzer/course/User/main.c)：应用更新流程。

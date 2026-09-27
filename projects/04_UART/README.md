@@ -1,11 +1,11 @@
-# UART and DMA
+# UART 与 DMA | UART and DMA
 
-## Selected projects
+## 代表工程 | Selected Projects
 
-- [`uart-callback/course/`](uart-callback/course/) — USART initialization, transmit/receive functions, IRQ handling and callback registration.
-- [`uart-dma/course/`](uart-dma/course/) — DMA-backed USART transmit/receive flow with interrupt handling.
+- [`uart-callback/course/`](uart-callback/course/)：USART 初始化、收发接口、IRQ 处理与回调注册。
+- [`uart-dma/course/`](uart-dma/course/)：基于 DMA 的 USART 收发与中断处理。
 
-## Receive path
+## 接收路径 | Receive Path
 
 ```text
 USART RX event
@@ -19,15 +19,15 @@ receive buffer
 callback / application handling
 ```
 
-The projects preserve their original baud-rate and pin settings. Confirm the board's USART route and voltage level before connecting an external serial adapter.
+工程保留原始波特率和引脚配置，连接外部串口适配器前需要核对板卡 USART 通路与电平。
 
-## Hardware relationship
+## 硬件关系 | Hardware Relationship
 
-USART pins use GPIO alternate-function mode. RCU provides both GPIO and USART clocks; NVIC handles receive events, while the DMA version adds peripheral-to-memory and memory-to-peripheral transfers around the USART data register.
+USART 引脚使用 GPIO Alternate Function。RCU 提供 GPIO 与 USART 时钟，NVIC 处理接收事件；DMA 版本在 USART Data Register 与内存缓冲区之间增加双向传输。
 
-## Key interfaces
+## 关键接口 | Key Interfaces
 
-- [`USART0.h`](uart-callback/course/Library/USART0.h) and [`USART0.c`](uart-callback/course/Library/USART0.c) — serial API, IRQ setup and callbacks.
-- [`DMA USART0.c`](uart-dma/course/Library/USART0.c) — DMA transfer configuration.
-- [`USART_config.h`](uart-dma/course/Library/USART_config.h) — serial and DMA resource configuration.
-- [`gd32f4xx_it.c`](uart-dma/course/User/gd32f4xx_it.c) — receive and DMA interrupt handling.
+- [`USART0.h`](uart-callback/course/Library/USART0.h) 与 [`USART0.c`](uart-callback/course/Library/USART0.c)：串口接口、IRQ 配置和回调。
+- [`DMA USART0.c`](uart-dma/course/Library/USART0.c)：DMA 传输配置。
+- [`USART_config.h`](uart-dma/course/Library/USART_config.h)：USART 与 DMA 资源配置。
+- [`gd32f4xx_it.c`](uart-dma/course/User/gd32f4xx_it.c)：接收与 DMA 中断处理。

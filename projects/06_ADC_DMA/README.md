@@ -1,11 +1,11 @@
-# ADC and DMA
+# ADC 与 DMA | ADC and DMA
 
-## Selected projects
+## 代表工程 | Selected Projects
 
-- [`adc-scan-dma/course/`](adc-scan-dma/course/) — regular-channel scan sequence with DMA transfer into memory.
-- [`adc-injected/course/`](adc-injected/course/) — injected conversion group and result handling.
+- [`adc-scan-dma/course/`](adc-scan-dma/course/)：常规通道扫描与 DMA 内存传输。
+- [`adc-injected/course/`](adc-injected/course/)：注入通道组与结果读取。
 
-## Acquisition path
+## 采集路径 | Acquisition Path
 
 ```text
 Analog input
@@ -19,14 +19,14 @@ data register
 DMA buffer or CPU read
 ```
 
-Channel order, data alignment, trigger source and DMA width must agree. The two retained projects keep regular and injected conversions separate so their control paths remain easy to inspect.
+Channel 顺序、Data Alignment、Trigger Source 与 DMA Transfer Width 需要相互一致。两个工程分别保留常规组和注入组的控制路径。
 
-## Hardware relationship
+## 硬件关系 | Hardware Relationship
 
-Analog-capable GPIO pins feed ADC channels. The regular group defines a conversion sequence and can request DMA transfers after each conversion; the injected group uses its own sequence and result registers for higher-priority sampling.
+模拟功能 GPIO 连接 ADC Channel。常规组定义转换序列，并可在每次转换后请求 DMA；注入组使用独立的序列和结果寄存器处理更高优先级的采样路径。
 
-## Key interfaces
+## 关键接口 | Key Interfaces
 
-- [`DMA scan main.c`](adc-scan-dma/course/User/main.c) — channel sequence, DMA buffer and foreground processing.
-- [`Injected conversion main.c`](adc-injected/course/User/main.c) — injected-channel configuration and result access.
-- [`gd32f4xx_it.c`](adc-injected/course/User/gd32f4xx_it.c) — interrupt integration used by the project framework.
+- [`DMA scan main.c`](adc-scan-dma/course/User/main.c)：Channel Sequence、DMA Buffer 与前台处理。
+- [`Injected conversion main.c`](adc-injected/course/User/main.c)：注入通道配置与结果读取。
+- [`gd32f4xx_it.c`](adc-injected/course/User/gd32f4xx_it.c)：工程框架使用的中断入口。

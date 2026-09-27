@@ -1,18 +1,17 @@
-# STM32 HAL and firmware structure
+# STM32 HAL 与固件结构 | STM32 HAL and Firmware Structure
 
-## CubeMX/HAL projects
+## CubeMX/HAL 工程
 
-- [`stm32-hal-led/course/`](stm32-hal-led/course/) — GPIO initialization.
-- [`stm32-hal-usart/course/`](stm32-hal-usart/course/) — serial configuration and generated initialization.
-- [`stm32-hal-adc/course/`](stm32-hal-adc/course/) — ADC configuration.
-- [`stm32-hal-spi/course/`](stm32-hal-spi/course/) — SPI and OLED-facing hardware module.
-- [`stm32-hal-timer/course/`](stm32-hal-timer/course/) — timer configuration.
+- [`stm32-hal-led/course/`](stm32-hal-led/course/)：GPIO 初始化。
+- [`stm32-hal-usart/course/`](stm32-hal-usart/course/)：USART 配置与生成的初始化代码。
+- [`stm32-hal-adc/course/`](stm32-hal-adc/course/)：ADC 配置。
+- [`stm32-hal-spi/course/`](stm32-hal-spi/course/)：SPI 与 OLED 板级模块。
+- [`stm32-hal-timer/course/`](stm32-hal-timer/course/)：Timer 配置。
 
-Each directory contains an `.ioc` file and a Keil project. The `.ioc` files identify the STM32F407 LQFP100 target; the original Keil configurations should be checked because some retain a GD32 device-pack selection.
+各目录包含 `.ioc` 与 Keil 工程。`.ioc` 指向 STM32F407 LQFP100；部分原始 Keil 配置仍选择 GD32 Device Pack，打开时需要交叉核对目标器件。
 
-## Firmware skeleton
+## 固件骨架 | Firmware Skeleton
 
-[`debug-middleware-skeleton/course/`](debug-middleware-skeleton/course/) contains the later GD32 debug project. Its `Hardware/`, `Middleware/`, `User/` and `Project/` directories show an interface split across EXTI, I²C, SPI and USART/DMA code.
+[`debug-middleware-skeleton/course/`](debug-middleware-skeleton/course/) 保存后期 GD32 调试工程。`Hardware/`、`Middleware/`、`User/` 与 `Project/` 目录展示 EXTI、I²C、SPI 和 USART/DMA 之间的接口边界。
 
-This directory is presented as a firmware and debugging skeleton, not as a completed multi-peripheral application.
-
+该目录用于阅读固件分层和调试入口，不包含多外设应用状态机。

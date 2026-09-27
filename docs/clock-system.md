@@ -1,8 +1,8 @@
-# Clock system
+# 时钟系统 | Clock System
 
-## Clock domains
+## 时钟域 | Clock Domains
 
-GD32F4 projects configure clocks through RCU, while STM32F4 projects use RCC or CubeMX-generated HAL initialization. Both platforms expose the same design problem: select a clock source, configure the PLL/system clock, enable bus clocks and derive peripheral timing.
+GD32F4 工程通过 RCU 配置时钟，STM32F4 工程使用 RCC 或 CubeMX 生成的 HAL 初始化代码。两类平台都需要选择时钟源、配置 PLL 和系统时钟、启用总线时钟，并由此计算外设时序。
 
 ```mermaid
 flowchart LR
@@ -16,19 +16,18 @@ flowchart LR
     B2 --> G[GPIO / ADC / SPI]
 ```
 
-Exact PLL factors and bus dividers remain part of each course project. They are not normalized across GD32 and STM32 because the original examples target different libraries and configurations.
+PLL 倍频和总线分频保留在各自工程中；GD32 与 STM32 的库和目标配置不同，不在仓库中统一改写。
 
-## Peripheral clocks
+## 外设时钟 | Peripheral Clocks
 
-Before a peripheral register is configured, its corresponding RCU/RCC gate must be enabled. GPIO ports, DMA controllers and communication peripherals may belong to different buses; their clock enable calls therefore appear in separate initialization functions.
+配置外设寄存器前，需要先打开对应的 RCU/RCC 时钟门控。GPIO、DMA 与通信外设可能位于不同总线，因此时钟使能分布在各自初始化函数中。
 
-Timer clock derivation requires additional attention because the timer input clock can differ from the visible APB clock after prescaling. PWM frequency is then determined by the timer clock, prescaler and auto-reload value.
+定时器输入时钟在 APB 分频后可能与可见的 APB 时钟不同。PWM 频率由定时器时钟、预分频值和自动重装值共同决定。
 
-## RTC clocking
+## RTC 时钟 | RTC Clocking
 
-The RTC examples compare an external low-speed source with the internal low-speed oscillator. RTC configuration also interacts with the backup domain, prescalers and alarm interrupt path. The retained RTC alarm project keeps those relationships visible in one Keil target.
+RTC 工程对照外部低速时钟与内部低速振荡器，并涉及备份域、预分频和 Alarm 中断路径。保留的 RTC Alarm 工程把这些关系放在同一 Keil 目标中。
 
-## Low-power recovery
+## 低功耗唤醒 | Low-Power Recovery
 
-The PMU example enters low-power modes and must account for clock state after wake-up. Source selection and peripheral reinitialization are platform-specific; refer to the selected project and the vendor reference manual when changing clock parameters.
-
+PMU 工程进入低功耗模式后需要处理唤醒后的时钟状态。时钟源选择和外设恢复与目标平台相关，修改参数时应同时核对工程配置和厂商参考手册。

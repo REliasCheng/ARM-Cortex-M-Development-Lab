@@ -1,7 +1,7 @@
 # ARM Cortex-M 开发实验室
 ## ARM Cortex-M Development Lab
 
-面向 STM32/GD32 Cortex-M 平台的嵌入式固件开发实验仓库。
+面向 STM32F407 与 GD32F407 Cortex-M4 平台的嵌入式固件开发实验仓库。
 
 An embedded firmware development repository focusing on ARM Cortex-M architecture, peripheral drivers and hardware-software integration.
 
@@ -59,7 +59,7 @@ GD32 工程主要采用 `User/`、`Hardware/`、`Library/` 和 `Middleware/` 组
 
 ### [GPIO 与板级输出 | GPIO and Board Output](projects/01_GPIO/)
 
-完成 GPIO 时钟、输出模式和板载 LED 控制，应用序列与硬件接口分离。
+包含 GPIO 时钟、输出模式和板载 LED 控制，应用序列与硬件接口分离。
 
 `GPIO / RCU / Board Driver`
 
@@ -150,4 +150,4 @@ ARM-Cortex-M-Development-Lab/
 
 项目源码快照保存在 `projects/**/course/`，文件级 SHA-256 记录见 [`docs/course-source-sha256.csv`](docs/course-source-sha256.csv)。第三方组件、硬件资料与图片来源见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 和 [`assets/images/SOURCES.md`](assets/images/SOURCES.md)。
 
-相关仓库：[Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) · [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) · [STC89C52](https://github.com/REliasCheng/stc89c52-learning) · [STC8](https://github.com/REliasCheng/STC8-MCU-Learning)
+相关仓库：[Embedded Systems Foundations](https://github.com/REliasCheng/Embedded-Systems-Foundations) · [Embedded C/C++](https://github.com/REliasCheng/Embedded-C-Cpp-Learning) · [STC89C52](https://github.com/REliasCheng/stc89c52-learning) · [STC8](https://github.com/REliasCheng/STC8-MCU-Learning) · [FreeRTOS Embedded Lab](https://github.com/REliasCheng/FreeRTOS-Embedded-Lab)

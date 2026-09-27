@@ -1,4 +1,4 @@
-# ARM Cortex-M Development Lab - Phase 1 资料审查
+# ARM Cortex-M Development Lab 源资料审查
 
 ## 审查结论
 
@@ -6,11 +6,11 @@
 
 可公开内容的主体不是安装包和手册，而是 80 个按外设递进的 Keil 工程、7 个 STM32CubeMX 配置工程、GD32/STM32 双平台实现、天空星开发板原理图，以及围绕 GPIO、UART、EXTI、Timer/PWM、DMA、RTC、I2C、OLED、ADC、SPI 和外部 Flash 形成的驱动演进。
 
-推荐公开定位：
+仓库定位：
 
 > ARM Cortex-M firmware projects for GD32F4 and STM32F4, covering peripheral drivers, interrupt-driven design, DMA, communication interfaces and firmware modularization.
 
-本阶段只完成只读审查。未创建 Git 仓库，未迁移公开项目，也未修改源资料。
+本文件记录建仓前的只读审查基线；公开仓库从这些资料中筛选代表工程，源目录保持不变。
 
 ## 1. 审查范围与方法
 
@@ -113,7 +113,7 @@
 - STM32 标准库示例还包含 `STM32F407ZG` OLED 工程。
 - day14/day15 含一份 `GD32F427RKT6` 嘉立创 EDA 原生工程，内部包含 1 份原理图和 1 份 PCB 文件。两天的 `.epro` SHA-256 完全相同，应只保留一份参考副本。
 
-注意：若干名称为 STM32 的 Keil 工程仍在 `.uvprojx` 中选择 `GD32F407VE/GD32F470ZG` 和 GigaDevice DFP，而对应源码或 `.ioc` 指向 STM32F407。这是现有工程配置不一致，需要在后续迁移文档中如实说明；不能直接修改课程原工程掩盖问题。
+注意：若干名称为 STM32 的 Keil 工程仍在 `.uvprojx` 中选择 `GD32F407VE/GD32F470ZG` 和 GigaDevice DFP，而对应源码或 `.ioc` 指向 STM32F407。公开文档保留这项配置差异，原工程文件不作改写。
 
 ### 3.3 硬件资料
 
@@ -241,13 +241,13 @@ B 类资料应优先转化为引用、分析和链接，不应整包复制到公
 - 课堂工程邀请链接、课程封面、安装截图和纯教学材料。
 - 自测 HEX；它们缺少可审查源码，不适合作为公开技术成果。
 
-## 7. Phase 2 推荐仓库设计
+## 7. 仓库结构设计
 
-推荐名称保持为：
+仓库名称：
 
 `ARM-Cortex-M-Development-Lab`
 
-推荐按技术能力组织，而不是按 day 编号组织：
+公开目录按固件机制组织，不沿用 day 编号：
 
 ```text
 ARM-Cortex-M-Development-Lab/
@@ -277,12 +277,12 @@ ARM-Cortex-M-Development-Lab/
 ```text
 course/    # 原工程，保持内容和文件名
 docs/      # 项目说明和接口分析
-practice/  # 仅在后续确有个人实现时创建
+practice/  # 仅保存已有的独立实现
 ```
 
-当前不建议创建 `RTOS/`、`USB/` 或 `Applications/` 目录；现有资料不足以支撑已完成工程。
+现有资料中的 RTOS 和 USB 内容没有形成独立应用工程，因此不设置对应项目目录。
 
-## 8. Phase 2 迁移规则
+## 8. 迁移规则
 
 1. 只迁移 A 类代表工程，不复制全部 80 个工程。
 2. 课程工程放在 `course/`，迁移前后对每个文件计算 SHA-256。
@@ -293,9 +293,9 @@ practice/  # 仅在后续确有个人实现时创建
 7. STM32 HAL 工程单独成组，避免与 GD32 SPL 工程混写。
 8. README 中只描述已存在工程；RTOS、USB、完整 PCB 制造和综合应用不作完成声明。
 
-## 9. 已发现风险与待确认项
+## 9. 配置与来源注意事项
 
-- 多个 STM32 工程的 Keil Device/Pack 仍指向 GD32，Phase 2 迁移时必须保留原工程并提示配置差异。
+- 多个 STM32 工程的 Keil Device/Pack 仍指向 GD32；公开仓库保留原工程，并在开发环境文档中说明配置差异。
 - 课程代码包含 4,041 个构建产物，需要建立严格 `.gitignore` 和迁移过滤清单。
 - 每日“知识整理”是累积复制文档，内容重复，不应逐日公开。
 - 部分源码注释存在旧编码显示问题，不应在课程原版上批量转码。
@@ -304,10 +304,10 @@ practice/  # 仅在后续确有个人实现时创建
 - `项目开发文档-GD32天空星.xlsx` 中多数综合模块未完成，不应转述为已实现项目。
 - `.epro` 内含 PCB 文件，但没有 DRC、Gerber、打样和实物验证记录。
 
-## 10. Phase 1 状态
+## 10. 审查基线
 
 ```text
-PHASE=1_READ_ONLY_AUDIT
+REVIEW_MODE=READ_ONLY_AUDIT
 SOURCE_FILES=110
 SOURCE_BYTES=3839177424
 ARCHIVES_INDEXED=36
@@ -316,8 +316,6 @@ COURSE_KEIL_PROJECTS=80
 CUBEMX_PROJECTS=7
 CUBEIDE_COURSE_PROJECTS=0
 SOURCE_MODIFIED=NO
-GIT_REPOSITORY_CREATED=NO
-PUBLIC_FILES_MIGRATED=NO
+REVIEW_TIME_GIT_REPOSITORY_CREATED=NO
+REVIEW_TIME_PUBLIC_FILES_MIGRATED=NO
 ```
-
-Phase 2 应在用户确认本报告后开始。

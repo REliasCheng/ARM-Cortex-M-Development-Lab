@@ -1,8 +1,8 @@
-# Interrupt system
+# 中断系统 | Interrupt System
 
-## Event path
+## 事件路径 | Event Path
 
-Cortex-M peripheral events reach firmware through a consistent path:
+Cortex-M 外设事件通过以下路径进入固件：
 
 ```mermaid
 flowchart LR
@@ -14,33 +14,32 @@ flowchart LR
     C --> A[Callback or application state]
 ```
 
-The selected projects exercise this path with GPIO edges, USART receive events, timer updates, DMA completion and RTC alarms.
+保留工程包含 GPIO 边沿、USART 接收、Timer 更新、DMA 完成和 RTC Alarm 等中断路径。
 
-## EXTI routing
+## EXTI 路由 | EXTI Routing
 
-The EXTI project configures a GPIO input, maps the pin to an EXTI line, selects the trigger edge and enables the matching NVIC channel. The handler checks the pending flag, clears it and dispatches the registered action. SysTick timing is used in the button path so debounce does not depend on an unbounded delay inside the ISR.
+EXTI 工程配置 GPIO 输入、引脚到 EXTI Line 的映射、触发边沿和对应 NVIC Channel。处理函数检查并清除 Pending Flag，再分发注册的动作。按键路径使用 SysTick 计时，避免在 ISR 中使用无界延时完成消抖。
 
-Key files:
+关键文件：
 
 - [`EXTI.c`](../projects/02_INTERRUPT/exti-callback/course/Library/EXTI.c)
 - [`EXTI.h`](../projects/02_INTERRUPT/exti-callback/course/Library/EXTI.h)
 - [`gd32f4xx_it.c`](../projects/02_INTERRUPT/exti-callback/course/User/gd32f4xx_it.c)
 
-## USART and DMA interrupts
+## USART 与 DMA 中断
 
-USART receive handlers read or transfer incoming data, update a receive buffer and hand control to a callback. The DMA project adds transfer configuration and completion handling so the CPU does not move every byte in the foreground loop.
+USART 接收处理读取输入数据、更新缓冲区并进入回调。DMA 工程增加传输配置和完成处理，避免 CPU 在前台逐字节搬运。
 
-Key files:
+关键文件：
 
 - [`USART0.c`](../projects/04_UART/uart-callback/course/Library/USART0.c)
 - [`DMA USART0.c`](../projects/04_UART/uart-dma/course/Library/USART0.c)
 - [`DMA interrupt handlers`](../projects/04_UART/uart-dma/course/User/gd32f4xx_it.c)
 
-## Priority and handler rules
+## 优先级与处理规则
 
-- Configure priority grouping before assigning preemption and subpriority values.
-- Clear the peripheral or EXTI pending condition handled by the ISR.
-- Keep blocking transfers and long delays outside interrupt context.
-- Share data with foreground code through explicit buffers, flags or callbacks.
-- Reconcile shared IRQ lines before combining independent projects.
-
+- 分配抢占优先级和响应优先级前先配置 Priority Grouping。
+- 处理完成后清除对应的外设或 EXTI Pending Flag。
+- 阻塞传输和长延时留在中断上下文之外。
+- 通过明确的缓冲区、标志或回调与前台代码共享数据。
+- 合并独立工程前先处理共用 IRQ Handler。
