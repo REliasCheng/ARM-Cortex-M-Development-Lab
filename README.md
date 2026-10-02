@@ -2,19 +2,21 @@
 
 面向 GD32F407 与 STM32F407 Cortex-M4 平台的裸机固件工程集合，重点展示启动流程、中断路径、外设驱动、DMA 数据通路和固件分层。
 
+**⚙️ Cortex-M Firmware Stack**
+
 ![Cortex-M firmware stack](assets/images/architecture/portfolio-overview.svg)
 
-## Project Snapshot
+## Firmware Snapshot
 
-| Field | Value |
+| Firmware Focus | Current Scope |
 | --- | --- |
-| Language | C, startup assembly |
-| Platform | GD32F407VE, STM32F407, ARM Cortex-M4 |
-| Toolchain | Keil MDK-ARM, STM32CubeMX |
-| Architecture | Bare-metal firmware, CMSIS, GD32 SPL, STM32 HAL |
-| Verification | Source and configuration review; build and hardware status are listed below |
+| MCU Family | GD32F407VE、STM32F407、ARM Cortex-M4 |
+| Firmware Layers | Application → Board Module → Driver → CMSIS / Vendor Library |
+| Peripheral Scope | GPIO、Interrupt、Timer、UART、SPI / I²C、ADC / DMA、RTC / Power |
+| Toolchain Context | Keil MDK-ARM、STM32CubeMX |
+| Evidence | Source and configuration review；build and hardware evidence not provided |
 
-> **Project status:** Architecture documented · Host Test not applicable · Build, hardware, and runtime evidence not provided
+> 🔌 **Evidence:** Firmware layers and configuration paths documented · Build, hardware, and runtime evidence not provided
 
 ## Overview
 
