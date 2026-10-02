@@ -2,13 +2,9 @@
 
 面向 GD32F407 与 STM32F407 Cortex-M4 平台的裸机固件工程集合，重点展示启动流程、中断路径、外设驱动、DMA 数据通路和固件分层。
 
-## Overview
+![Cortex-M firmware stack](assets/images/architecture/portfolio-overview.svg)
 
-仓库按 Cortex-M4 固件机制组织独立工程，覆盖系统启动、时钟配置、NVIC 与中断处理，以及 GPIO、Timer、UART、I²C、SPI、ADC、RTC、Watchdog 和低功耗等外设路径。
-
-GD32F407 工程使用 CMSIS 与 GD32F4 标准外设库；STM32F407 工程包含 STM32CubeMX 配置和 HAL 初始化代码。两类平台的目标器件、厂商库和工程配置保持各自边界，不被描述成单一的集成固件。
-
-## Platform & Technology
+## Project Snapshot
 
 | Field | Value |
 | --- | --- |
@@ -17,6 +13,14 @@ GD32F407 工程使用 CMSIS 与 GD32F4 标准外设库；STM32F407 工程包含 
 | Toolchain | Keil MDK-ARM, STM32CubeMX |
 | Architecture | Bare-metal firmware, CMSIS, GD32 SPL, STM32 HAL |
 | Verification | Source and configuration review; build and hardware status are listed below |
+
+> **Project status:** Architecture documented · Host Test not applicable · Build, hardware, and runtime evidence not provided
+
+## Overview
+
+仓库按 Cortex-M4 固件机制组织独立工程，覆盖系统启动、时钟配置、NVIC 与中断处理，以及 GPIO、Timer、UART、I²C、SPI、ADC、RTC、Watchdog 和低功耗等外设路径。
+
+GD32F407 工程使用 CMSIS 与 GD32F4 标准外设库；STM32F407 工程包含 STM32CubeMX 配置和 HAL 初始化代码。两类平台的目标器件、厂商库和工程配置保持各自边界，不被描述成单一的集成固件。
 
 ## Architecture
 
