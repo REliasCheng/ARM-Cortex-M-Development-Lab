@@ -79,10 +79,10 @@ ARM-Cortex-M-Development-Lab/
 
 | Verification Type | Status | Boundary |
 | --- | --- | --- |
-| Host Test | N/A | 工程面向 Cortex-M4 MCU，不包含 Host Test 入口 |
-| Build Verification | NOT VERIFIED | 本次 README 调整未执行 Keil 或 CubeMX 工程构建，仓库未提供当前公开快照的可复现构建日志 |
-| Hardware Validation | NOT VERIFIED | 当前公开文档未提供可复核的 GD32F407 或 STM32F407 板端测试记录 |
-| Runtime Evidence | NOT INCLUDED | 当前仓库未提供串口日志、波形、测量结果或调试记录作为运行证据 |
+| Host Test | Not Applicable | 工程面向 Cortex-M4 MCU，不包含 Host Test 入口 |
+| Build Verification | Not Provided | 仓库未提供与当前公开版本对应的可复现 Keil 或 CubeMX 工程构建记录 |
+| Hardware Validation | Not Provided | 当前公开文档未提供可复核的 GD32F407 或 STM32F407 板端测试记录 |
+| Runtime Evidence | Not Provided | 当前仓库未提供串口日志、波形、测量结果或调试记录作为运行证据 |
 
 工程文件和 `.ioc` 配置存在，不等同于当前构建或硬件验证通过。打开工程前需要按[开发环境](docs/development-environment.md)核对目标器件、Device Pack、启动文件、Include Paths、Flash Algorithm 和调试器配置。
 
