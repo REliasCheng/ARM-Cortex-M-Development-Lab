@@ -14,27 +14,19 @@ flowchart LR
     C --> A[Callback or application state]
 ```
 
-保留工程包含 GPIO 边沿、USART 接收、Timer 更新、DMA 完成和 RTC Alarm 等中断路径。
+该事件模型适用于 GPIO 边沿、USART 接收、Timer 更新、DMA 完成和 RTC Alarm 等常见中断路径；当前默认分支不包含这些路径的固件实现。
 
 ## EXTI 路由 | EXTI Routing
 
 EXTI 工程配置 GPIO 输入、引脚到 EXTI Line 的映射、触发边沿和对应 NVIC Channel。处理函数检查并清除 Pending Flag，再分发注册的动作。按键路径使用 SysTick 计时，避免在 ISR 中使用无界延时完成消抖。
 
-关键文件：
-
-- [`EXTI.c`](../projects/02_INTERRUPT/exti-callback/course/Library/EXTI.c)
-- [`EXTI.h`](../projects/02_INTERRUPT/exti-callback/course/Library/EXTI.h)
-- [`gd32f4xx_it.c`](../projects/02_INTERRUPT/exti-callback/course/User/gd32f4xx_it.c)
+实现时需要把 EXTI 配置、IRQ Handler 与应用回调分开，并明确 pending flag 的清除责任。
 
 ## USART 与 DMA 中断
 
 USART 接收处理读取输入数据、更新缓冲区并进入回调。DMA 工程增加传输配置和完成处理，避免 CPU 在前台逐字节搬运。
 
-关键文件：
-
-- [`USART0.c`](../projects/04_UART/uart-callback/course/Library/USART0.c)
-- [`DMA USART0.c`](../projects/04_UART/uart-dma/course/Library/USART0.c)
-- [`DMA interrupt handlers`](../projects/04_UART/uart-dma/course/User/gd32f4xx_it.c)
+实现时需要分别记录 USART 错误、中断接收、DMA 完成与缓冲区所有权，避免把中断到达等同于完整消息有效。
 
 ## 优先级与处理规则
 
