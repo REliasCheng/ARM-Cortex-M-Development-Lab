@@ -14,7 +14,7 @@ flowchart LR
     C --> A[Callback or application state]
 ```
 
-该事件模型适用于 GPIO 边沿、USART 接收、Timer 更新、DMA 完成和 RTC Alarm 等常见中断路径；当前默认分支不包含这些路径的固件实现。
+该事件模型适用于 GPIO 边沿、USART 接收、Timer 更新、DMA 完成和 RTC Alarm 等常见中断路径。当前默认分支已有[可移植的 Timer 事件入队与主循环控制核心](control-foundation.md)，但没有目标 MCU 的中断向量、Timer 驱动或其他外设 ISR 实现。
 
 ## EXTI 路由 | EXTI Routing
 

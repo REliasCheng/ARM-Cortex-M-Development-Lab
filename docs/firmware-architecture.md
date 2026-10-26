@@ -2,7 +2,7 @@
 
 ## 层次边界 | Layer Boundaries
 
-保留的 GD32 工程从直接外设访问逐步拆分出板级模块和协议接口：
+历史 GD32 工程从直接外设访问逐步拆分出板级模块和协议接口。当前公开仓库中的[原创 Host 控制核心](control-foundation.md)实现了 Application 与 `ControlPort` 接口边界；下图的厂商层仍是目标适配参考：
 
 ```mermaid
 flowchart TD
