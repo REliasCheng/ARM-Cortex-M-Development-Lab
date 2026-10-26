@@ -10,6 +10,10 @@
 
 当前默认分支不包含 Keil、CubeMX/HAL 或厂商示例工程。以下内容仅说明未来从官方渠道建立个人工程时的工具链边界。
 
+## Host 控制核心
+
+当前默认分支提供原创 C11 控制源码、Mock 测试和 Demo。普通 PC 的严格 GCC/Clang 构建与 ASan/UBSan 流程见 [Timer-to-Sample Control](control-foundation.md) 和仓库 CI。它们验证应用状态、队列边界和错误传播，**不是** GD32/STM32 目标编译或板端运行。原始资产与许可取舍见[来源记录](source-provenance.md)。
+
 ## 打开 GD32 工程
 
 1. 安装 Keil MDK-ARM。

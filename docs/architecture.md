@@ -2,7 +2,7 @@
 
 ## 启动流程 | Startup
 
-保留的裸机工程遵循 Cortex-M 的标准启动路径：
+以下是历史裸机工程的参考启动路径；当前公开的 Host 控制核心没有 Cortex-M 启动文件：
 
 ```mermaid
 flowchart LR

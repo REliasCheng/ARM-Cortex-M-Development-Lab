@@ -1,0 +1,47 @@
+name: Host control core
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  compiler:
+    name: C11 control (${{ matrix.compiler }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v5.1.0
+      - name: Build and run original control core tests and demo
+        run: |
+          ${{ matrix.compiler }} -std=c11 -Wall -Wextra -Werror -pedantic \
+            -I include src/control_app.c tests/test_control_app.c -o control_test
+          ./control_test
+          ${{ matrix.compiler }} -std=c11 -Wall -Wextra -Werror -pedantic \
+            -I include src/control_app.c tools/control_demo.c -o control_demo
+          ./control_demo
+
+  sanitizer:
+    name: C11 control (${{ matrix.sanitizer }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [address, undefined]
+    steps:
+      - uses: actions/checkout@v5.1.0
+      - name: Build and run under sanitizer
+        run: |
+          gcc -std=c11 -Wall -Wextra -Werror -pedantic -g -O1 \
+            -fno-omit-frame-pointer -fno-sanitize-recover=all \
+            -fsanitize=${{ matrix.sanitizer }} \
+            -I include src/control_app.c tests/test_control_app.c -o control_test
+          ./control_test
+          gcc -std=c11 -Wall -Wextra -Werror -pedantic -g -O1 \
+            -fno-omit-frame-pointer -fno-sanitize-recover=all \
+            -fsanitize=${{ matrix.sanitizer }} \
+            -I include src/control_app.c tools/control_demo.c -o control_demo
+          ./control_demo
